@@ -1,11 +1,22 @@
 #!/Users/nabeel/Documents/Personal/Code/bearmap/scraper/venv/bin/python3
+# Copyright (c) Twisted Matrix Laboratories.
+# See LICENSE for details.
+import os, sys
 
-# -*- coding: utf-8 -*-
-import re
-import sys
+try:
+    import _preamble
+except ImportError:
+    try:
+        sys.exc_clear()
+    except AttributeError:
+        # exc_clear() (and the requirement for it) has been removed from Py3
+        pass
+
+# begin chdir armor
+sys.path[:] = map(os.path.abspath, sys.path)
+# end chdir armor
+
+sys.path.insert(0, os.path.abspath(os.getcwd()))
 
 from twisted.scripts.trial import run
-
-if __name__ == '__main__':
-    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
-    sys.exit(run())
+run()

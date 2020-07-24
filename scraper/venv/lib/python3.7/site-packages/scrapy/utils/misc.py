@@ -1,4 +1,4 @@
-"""Helper functions which doesn't fit anywhere else"""
+"""Helper functions which don't fit anywhere else"""
 import re
 import hashlib
 from importlib import import_module
@@ -31,7 +31,7 @@ def arg_to_iter(arg):
 def load_object(path):
     """Load an object given its absolute object path, and return it.
 
-    object can be a class, function, variable o instance.
+    object can be a class, function, variable or an instance.
     path ie: 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware'
     """
 
@@ -52,7 +52,7 @@ def load_object(path):
 
 
 def walk_modules(path):
-    """Loads a module and all its submodules from a the given module path and
+    """Loads a module and all its submodules from the given module path and
     returns them. If *any* module throws an exception while importing, that
     exception is thrown back.
 

@@ -27,6 +27,24 @@ class MediaPipeline(object):
     def __init__(self, download_func=None):
         self.download_func = download_func
 
+
+    def _key_for_pipe(self, key, base_class_name=None,
+                      settings=None):
+        """
+        >>> MediaPipeline()._key_for_pipe("IMAGES")
+        'IMAGES'
+        >>> class MyPipe(MediaPipeline):
+        ...     pass
+        >>> MyPipe()._key_for_pipe("IMAGES", base_class_name="MediaPipeline")
+        'MYPIPE_IMAGES'
+        """
+        class_name = self.__class__.__name__
+        formatted_key = "{}_{}".format(class_name.upper(), key)
+        if class_name == base_class_name or not base_class_name \
+            or (settings and not settings.get(formatted_key)):
+            return key
+        return formatted_key
+
     @classmethod
     def from_crawler(cls, crawler):
         try:

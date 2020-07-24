@@ -21,6 +21,8 @@ else:
 
 from twisted.internet import defer, reactor, ssl
 
+from .utils.misc import arg_to_iter
+
 logger = logging.getLogger(__name__)
 
 
@@ -43,11 +45,15 @@ class MailSender(object):
             settings['MAIL_PASS'], settings.getint('MAIL_PORT'),
             settings.getbool('MAIL_TLS'), settings.getbool('MAIL_SSL'))
 
-    def send(self, to, subject, body, cc=None, attachs=(), mimetype='text/plain', _callback=None):
+    def send(self, to, subject, body, cc=None, attachs=(), mimetype='text/plain', charset=None, _callback=None):
         if attachs:
             msg = MIMEMultipart()
         else:
             msg = MIMENonMultipart(*mimetype.split('/', 1))
+
+        to = list(arg_to_iter(to))
+        cc = list(arg_to_iter(cc))
+
         msg['From'] = self.mailfrom
         msg['To'] = COMMASPACE.join(to)
         msg['Date'] = formatdate(localtime=True)
@@ -57,8 +63,11 @@ class MailSender(object):
             rcpts.extend(cc)
             msg['Cc'] = COMMASPACE.join(cc)
 
+        if charset:
+            msg.set_charset(charset)
+
         if attachs:
-            msg.attach(MIMEText(body))
+            msg.attach(MIMEText(body, 'plain', charset or 'us-ascii'))
             for attach_name, mimetype, f in attachs:
                 part = MIMEBase(*mimetype.split('/'))
                 part.set_payload(f.read())
