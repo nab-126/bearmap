@@ -11,15 +11,12 @@ class StackSpider(Spider):
     ]
 
     def parse(self, response):
-        #//*[@id="courseinventorycontainer"]/div/div[2]
-        # questions = Selector(response).xpath('//*[@id="courseinventorycontainer"]/div/div[2]')
-        questions = Selector(response).xpath('//div[@class="courseblock"]/button/h3')
-        #questions = Selector(response).xpath('//div[@class="summary"]/h3')
-
-        print(len(questions))
-        print('yo')
+        questions = Selector(response).xpath('//div[@class="courseblock"]')
+        # questions = Selector(response).xpath('//div[@class="courseblock"]/button/h3')
         for question in questions:
             item = StackItem()
             item['code'] = question.xpath(
-                'span[@class="code"]/text()').extract()[0]
+                'button/h3/span[@class="code"]/text()').extract()[0].replace("\u00a0", " ")
+            # item['code'] = question.xpath('div[@class="course-section"]/')
+            item['prerequisites'] = question.xpath('div/div/div/p/a[@class="bubblelink code"]/text()').extract()
             yield item
