@@ -15,6 +15,15 @@ SPIDER_MODULES = ['stack.spiders']
 NEWSPIDER_MODULE = 'stack.spiders'
 
 
+# mondoDB atlas connection
+ITEM_PIPELINES = {'stack.pipelines.MongoDBPipeline':0}
+
+MONGODB_SERVER = "mongodb+srv://admin:jlwkrcotQDYlbW3F@berkeley.bljdr.mongodb.net/<dbname>?retryWrites=true&w=majority"
+MONGODB_PORT = 27017
+MONGODB_DB = "Berkeley"
+MONGODB_COLLECTION = "Classes"
+
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stack (+http://www.yourdomain.com)'
 

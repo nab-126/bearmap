@@ -5,9 +5,9 @@ from stack.items import StackItem
 
 class StackSpider(Spider):
     name = "class-ie"
-    allowed_domains = ["guide.berkeley.edu/courses/compsci/"]
+    allowed_domains = ["http://guide.berkeley.edu/courses/stat/"]
     start_urls = [
-        "http://guide.berkeley.edu/courses/compsci/",
+        "http://guide.berkeley.edu/courses/stat/",
     ]
 
     def parse(self, response):
