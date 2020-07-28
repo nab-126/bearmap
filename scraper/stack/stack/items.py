@@ -14,3 +14,10 @@ class StackItem(scrapy.Item):
     code = scrapy.Field()
     prerequisites = scrapy.Field()
     pass
+
+class StackItemMajor(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    code = scrapy.Field()
+    prerequisites = scrapy.Field()
+    pass

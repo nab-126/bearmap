@@ -1,2 +1,4 @@
 items.json
 .DS_Store
+__pycache__
+graphFile.json
