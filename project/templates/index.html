@@ -2,17 +2,21 @@
 <html>
   <head>
     <link rel="stylesheet" href="../static/css/graph-creator.css" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   </head>
+  
 
   <body>
-
-    <div id="toolbox">
-      <input type="file" id="hidden-file-upload"><input id="upload-input" type="image" title="upload graph" src="upload-icon.png" alt="upload graph"> <input type="image" id="download-input" title="download graph" src="download-icon.png" alt="download graph"> <input type="image" id="delete-graph" title="delete graph" src="trash-icon.png" alt="delete graph"> 
-    </div>
-
+    <select class="js-example-basic-multiple" style="width: 50%" name="classes[]">
+      <option value="AL">Alabama</option>
+      <option value="WY">Wyoming</option>
+    </select>
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script> -->
     <script src="//d3js.org/d3.v3.js" charset="utf-8"></script>    
-    <script src="//cdn.jsdelivr.net/filesaver.js/0.1/FileSaver.min.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/filesaver.js/0.1/FileSaver.min.js"></script> -->
     <script src="../static/graph-creator.js"></script>
   </body>
-
 </html>

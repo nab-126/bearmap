@@ -1,3 +1,8 @@
+$(document).ready(function() {
+  $('.js-example-basic-multiple').select2();
+  console.log("WORKING");
+});
+
 document.onload = (function(d3, saveAs, Blob, undefined){
     "use strict";
   
@@ -254,7 +259,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
           curScale = nodeBCR.width/consts.nodeRadius,
           placePad  =  5*curScale,
           useHW = curScale > 1 ? nodeBCR.width*0.71 : consts.nodeRadius*1.42;
-      // replace with editableconent text
+      // replace with editablecontent text
       var d3txt = thisGraph.svg.selectAll("foreignObject")
             .data([d])
             .enter()
@@ -359,7 +364,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       } else if (state.graphMouseDown && d3.event.shiftKey){
         // clicked not dragged from svg
         var xycoords = d3.mouse(thisGraph.svgG.node()),
-            d = {id: thisGraph.idct++, title: "new concept1", x: xycoords[0], y: xycoords[1]};
+            d = {id: thisGraph.idct++, title: "Class: Shift + Click to edit", x: xycoords[0], y: xycoords[1]};
         thisGraph.nodes.push(d);
         thisGraph.updateGraph();
         // make title of text immediently editable
@@ -520,18 +525,37 @@ document.onload = (function(d3, saveAs, Blob, undefined){
         yLoc = 100;
   
     // initial node data
-    var nodes = [{title: "Data 8", id: 0, x: xLoc, y: yLoc},
-                 {title: "Data 100 ", id: 1, x: xLoc, y: yLoc + 200},
-                 {title: "Stat 140 ", id: 2, x: xLoc + 100, y: yLoc + 100}];
-    var edges = [{source: nodes[0], target: nodes[1]},
-                {source: nodes[0], target: nodes[2]}];
+    var nodes;
+    d3.json("/getMyJson", function (error, data) {
+      console.log("d");
+      console.log(data);
+      
+      // data['x'] = xLoc;
+      // data['y'] = yLoc;
+      nodes = data;
+      var edges = [{source: nodes[0], target: nodes[6]},
+                {source: nodes[3], target: nodes[6]},
+                {source: nodes[4], target: nodes[6]}];
+      /** MAIN SVG **/
+      var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+      var graph = new GraphCreator(svg, nodes, edges);
+          graph.setIdCt(2);
+      graph.updateGraph();
+    })
+    // var nodes = [{title: "Data 81", id: 0, x: xLoc, y: yLoc},
+    //              {title: "Data 100 ", id: 1, x: xLoc, y: yLoc + 200},
+    //              {title: "Stat 140 ", id: 2, x: xLoc + 100, y: yLoc + 100}];
+    // var edges = [{source: nodes[0], target: nodes[1]},
+    //             {source: nodes[0], target: nodes[2]}];
   
   
-    /** MAIN SVG **/
-    var svg = d3.select("body").append("svg")
-          .attr("width", width)
-          .attr("height", height);
-    var graph = new GraphCreator(svg, nodes, edges);
-        graph.setIdCt(2);
-    graph.updateGraph();
+    // /** MAIN SVG **/
+    // var svg = d3.select("body").append("svg")
+    //       .attr("width", width)
+    //       .attr("height", height);
+    // var graph = new GraphCreator(svg, nodes, edges);
+    //     graph.setIdCt(2);
+    // graph.updateGraph();
   })(window.d3, window.saveAs, window.Blob);
