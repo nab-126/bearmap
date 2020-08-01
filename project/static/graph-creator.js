@@ -618,20 +618,20 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       // data['x'] = xLoc;
       // data['y'] = yLoc;
       // nodes = data;
-      // var nodes = [{'title': "Data 8", 'id': 0, 'x':100, 'y':100},
-      //         {'title': "Math 1A", 'id': 1, 'x':100, 'y':100},
-      //         {'title': "Math 1B", 'id': 2, 'x':100, 'y':100},
-      //         {'title': "Math 54", 'id': 3, 'x':100, 'y':100},
-      //         {'title': "CS 61A", 'id': 4, 'x':100, 'y':100},
-      //         {'title': "CS 61B", 'id': 5, 'x':200, 'y':200},
-      //         {'title': "Data 100", 'id': 6, 'x':100, 'y':150}]
-      // var edges = [{source: nodes[0], target: nodes[6]},
-      //           {source: nodes[3], target: nodes[6]},
-      //           {source: nodes[4], target: nodes[6]}];
+      var nodes = [{'title': "Data 8", 'id': 0, 'x':100, 'y':100},
+              {'title': "Math 1A", 'id': 1, 'x':100, 'y':100},
+              {'title': "Math 1B", 'id': 2, 'x':100, 'y':100},
+              {'title': "Math 54", 'id': 3, 'x':100, 'y':100},
+              {'title': "CS 61A", 'id': 4, 'x':100, 'y':100},
+              {'title': "CS 61B", 'id': 5, 'x':200, 'y':200},
+              {'title': "Data 100", 'id': 6, 'x':100, 'y':150}]
+      var edges = [{source: nodes[0], target: nodes[6]},
+                {source: nodes[3], target: nodes[6]},
+                {source: nodes[4], target: nodes[6]}];
       
-    var nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
-    {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
-    var edges = [{source: nodes[1], target: nodes[0]}];
+    // var nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
+    // {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
+    // var edges = [{source: nodes[1], target: nodes[0]}];
       /** MAIN SVG **/
       // var svg = d3.select("body").append("svg")
       //       .attr("width", width)
@@ -645,7 +645,8 @@ document.onload = (function(d3, saveAs, Blob, undefined){
         .style('margin-left','0px');
         
       var graph = new GraphCreator(svg, nodes, edges);
-          graph.setIdCt(2);
+          // graph.setIdCt(2);
+          graph.setIdCt(7);
       graph.updateGraph();
     })
 
