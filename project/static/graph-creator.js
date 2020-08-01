@@ -1,12 +1,6 @@
-
 document.onload = (function(d3, saveAs, Blob, undefined){
-
-
-
-
-
-
   "use strict";
+
   // define graphcreator object
   var GraphCreator = function(svg, nodes, edges){
     var thisGraph = this;
@@ -165,6 +159,17 @@ document.onload = (function(d3, saveAs, Blob, undefined){
     // handle delete graph
     d3.select("#delete-graph").on("click", function(){
       thisGraph.deleteGraph(false);
+    });
+
+    // handle add class
+    d3.select("#class_search_submit").on("click", function() {
+      // var thisGraph = this;
+      thisGraph.addClass();
+      // console.log(thisGraph);
+      console.log("WAKANDA");
+      var search_class = $('#class_search_box').val();
+      console.log(search_class);
+      // GraphCreator.prototype.addClass.call();
     });
   };
 
@@ -427,7 +432,6 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       // dragged not clicked
       state.justScaleTransGraph = false;
     } else if (state.graphMouseDown && d3.event.shiftKey){
-      console.log("Adding new node");
       // clicked not dragged from svg
       var xycoords = d3.mouse(thisGraph.svgG.node()),
           d = {id: thisGraph.idct++, title: "new concept", x: xycoords[0], y: xycoords[1]};
@@ -572,8 +576,23 @@ document.onload = (function(d3, saveAs, Blob, undefined){
     svg.attr("width", x).attr("height", y);
   };
 
+  // add class to graph 
+  GraphCreator.prototype.addClass = function(){
+    var thisGraph = this;
+    console.log(thisGraph);
+    var d = {id: thisGraph.idct++, title: "new concept", x: 200, y: 250};
+    thisGraph.nodes.push(d);
+    thisGraph.updateGraph();
+  };
 
   
+  const all_classes = ['CS 61A', 'CS 61B'];
+  // use Jquery autocomplete
+  ////////////////////////////////
+  $( "#class_search_box" ).autocomplete({
+    source: all_classes
+  });
+
   /**** MAIN ****/
 
   // warn the user when leaving
@@ -598,18 +617,28 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       
       // data['x'] = xLoc;
       // data['y'] = yLoc;
-      nodes = data;
-      var edges = [{source: nodes[0], target: nodes[6]},
-                {source: nodes[3], target: nodes[6]},
-                {source: nodes[4], target: nodes[6]}];
+      // nodes = data;
+      // var nodes = [{'title': "Data 8", 'id': 0, 'x':100, 'y':100},
+      //         {'title': "Math 1A", 'id': 1, 'x':100, 'y':100},
+      //         {'title': "Math 1B", 'id': 2, 'x':100, 'y':100},
+      //         {'title': "Math 54", 'id': 3, 'x':100, 'y':100},
+      //         {'title': "CS 61A", 'id': 4, 'x':100, 'y':100},
+      //         {'title': "CS 61B", 'id': 5, 'x':200, 'y':200},
+      //         {'title': "Data 100", 'id': 6, 'x':100, 'y':150}]
+      // var edges = [{source: nodes[0], target: nodes[6]},
+      //           {source: nodes[3], target: nodes[6]},
+      //           {source: nodes[4], target: nodes[6]}];
+      
+    var nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
+    {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
+    var edges = [{source: nodes[1], target: nodes[0]}];
       /** MAIN SVG **/
       // var svg = d3.select("body").append("svg")
       //       .attr("width", width)
       //       .attr("height", height);
       
       var svg = d3.select('#clustergram_container').append("svg").style('display','block').style('height','100%').style('width','100%');
-      d3.select('#clust_instruct_container').style('display','block');
-
+      // d3.select('#clust_instruct_container').style('display','block');
 
       // shift the footer left
       d3.select('#footer_div')
@@ -619,74 +648,8 @@ document.onload = (function(d3, saveAs, Blob, undefined){
           graph.setIdCt(2);
       graph.updateGraph();
     })
-    // var nodes = [{title: "Data 81", id: 0, x: xLoc, y: yLoc},
-    //              {title: "Data 100 ", id: 1, x: xLoc, y: yLoc + 200},
-    //              {title: "Stat 140 ", id: 2, x: xLoc + 100, y: yLoc + 100}];
-    // var edges = [{source: nodes[0], target: nodes[1]},
-    //             {source: nodes[0], target: nodes[2]}];
-  
-  
-    // /** MAIN SVG **/
-    // var svg = d3.select("body").append("svg")
-    //       .attr("width", width)
-    //       .attr("height", height);
-    // var graph = new GraphCreator(svg, nodes, edges);
-    //     graph.setIdCt(2);
-    // graph.updateGraph();
-
-    // function get_all_classes() {
-    //   // return new Promise(all_classes => {
-    //   //   setTimeout(() => {
-    //   //     resolve('resolved');
-    //   //   }, 2000);
-    //   // });
-    //   all_classes = ['CS 61A', 'CS 61B'];
-    //   return new Promise(all_classes => {all_classes = ['CS 61A', 'CS 61B'];});
-    // }
-    
-    // async function asyncCall() {
-    //   console.log('calling');
-    //   const all_classes = await get_all_classes();
-    //   $( "#class_search_box" ).autocomplete({
-    //     // source: ['CS 61A', 'CS 61B']
-    //     source: all_classes
-    //   });
-    //   // expected output: "resolved"
-    // }
-    
-    // asyncCall();
-
-    const all_classes = ['CS 61A', 'CS 61B'];
-    console.log("posiii");
-    // use Jquery autocomplete
-    ////////////////////////////////
-    $( "#class_search_box" ).autocomplete({
-      // source: ['CS 61A', 'CS 61B']
-      source: all_classes
-    });
-
-    // submit class button 
-    $("#class_search_box").keyup(function (e) {
-      if (e.keyCode == 13) {
-          // Do something
-          // console.log('pressed enter');
-          find_class();
-      }
-    });
 
   })(window.d3, window.saveAs, window.Blob);
- 
-// find class in graph 
-function find_class(){
-  // get the searched class 
-  search_class = $('#class_search_box').val();
-  console.log("working search");
-  console.log(search_class);
-  // if (all_class.indexOf(search_gene) != -1){
-  //   // zoom and highlight found gene 
-  //   /////////////////////////////////
-  //   console.log("working search");
-    
-  // }
 
-};
+  
+ 

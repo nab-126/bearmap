@@ -4,9 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Nabeel Hingun">
     <title>Bear Course Planner</title>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+    
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -38,9 +37,9 @@
                 <input id='class_search_box' type="text" class="form-control" placeholder="Input Class" aria-describedby="sizing-addon2">
 
                 <div id='class_search_button' class="btn-group" data-toggle="buttons" >
-                  <label id='class_search_submit' class="btn btn-primary active " onclick="find_class();">
+                  <label id='class_search_submit' class="btn btn-primary active ">
                   <!-- <label id='class_search_submit' class="btn btn-primary active " onclick="find_class();"> -->
-                    <input type="radio" name="options" id="" autocomplete="off" checked > Search
+                    <input type="radio" name="options" id="" autocomplete="off" checked > Add
                   </label>
                 </div>
             </div>
@@ -55,14 +54,7 @@
       <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
-
     
-    <!-- <select class="js-example-basic-multiple" style="width: 50%" name="classes[]">
-      <option value="AL">Alabama</option>
-      <option value="WY">Wyoming</option>
-    </select> -->
-    
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script> -->
     <script src="//d3js.org/d3.v3.js" charset="utf-8"></script>    
     <!-- <script src="//cdn.jsdelivr.net/filesaver.js/0.1/FileSaver.min.js"></script> -->
 
@@ -71,7 +63,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    
+
     <script src="../static/graph-creator.js"></script>
   </body>
 </html>
