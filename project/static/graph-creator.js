@@ -581,12 +581,15 @@ document.onload = (function(d3, saveAs, Blob, undefined){
     thisGraph.updateGraph();
   };
 
-  
-  const all_classes = ['CS 61A', 'CS 61B'];
-  // use Jquery autocomplete
-  ////////////////////////////////
-  $( "#class_search_box" ).autocomplete({
-    source: all_classes
+  d3.json("/data", function (error, data) {
+    // console.log(data);
+    const all_classes = data['result'];
+    // const all_classes = ['CS 61A', 'CS 61B'];
+    // use Jquery autocomplete
+    ////////////////////////////////
+    $("#class_search_box").autocomplete({
+      source: all_classes
+    });
   });
 
   /**** MAIN ****/

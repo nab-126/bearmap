@@ -1,7 +1,29 @@
-from flask import Flask, Response, render_template
+from flask import Flask, Response, render_template, jsonify, request
+# from flask_pymongo import PyMongo
 import json
+import pymongo
+
 
 app = Flask(__name__)
+
+# app.config['MONGO_DBNAME'] = 'restdb'
+# app.config['MONGO_URI'] = 'mongodb://localhost:27017/restdb'
+
+app.config['MONGO_URI'] = "mongodb+srv://admin:jlwkrcotQDYlbW3F@berkeley.bljdr.mongodb.net/<dbname>?retryWrites=true&w=majority"
+app.config['MONGO_DBNAME'] = "Berkeley"
+
+# mongo = PyMongo(app)
+connection = pymongo.MongoClient('mongodb+srv://admin:jlwkrcotQDYlbW3F@berkeley.bljdr.mongodb.net/<dbname>?retryWrites=true&w=majority')
+db = connection['Berkeley']
+
+@app.route('/data', methods=['GET'])
+def get_data():
+  classes = db['Classes']
+#   classes = db.Classes
+  output = []
+  for c in classes.find():
+    output.append(c['code'])
+  return jsonify({'result' : output})
 
 @app.route('/')
 def index():
