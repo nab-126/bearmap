@@ -299,7 +299,7 @@ html {
     margin-top: 10px;
     /*needed for some reason*/
     margin-left: 0px;
-    display: none:;
+    /* display: none; */
   }
   
   /*class search box */

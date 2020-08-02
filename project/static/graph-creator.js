@@ -163,14 +163,10 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 
     // handle add class
     d3.select("#class_search_submit").on("click", function() {
-      // var thisGraph = this;
-      thisGraph.addClass();
-      // console.log(thisGraph);
-      console.log("WAKANDA");
       var search_class = $('#class_search_box').val();
       console.log(search_class);
-      // GraphCreator.prototype.addClass.call();
-    });
+      thisGraph.addClass(search_class);
+      });
   };
 
   GraphCreator.prototype.setIdCt = function(idct){
@@ -577,10 +573,10 @@ document.onload = (function(d3, saveAs, Blob, undefined){
   };
 
   // add class to graph 
-  GraphCreator.prototype.addClass = function(){
+  GraphCreator.prototype.addClass = function(class_name){
     var thisGraph = this;
     console.log(thisGraph);
-    var d = {id: thisGraph.idct++, title: "new concept", x: 200, y: 250};
+    var d = {id: thisGraph.idct++, title: class_name, x: 200, y: 250};
     thisGraph.nodes.push(d);
     thisGraph.updateGraph();
   };
@@ -645,8 +641,8 @@ document.onload = (function(d3, saveAs, Blob, undefined){
         .style('margin-left','0px');
         
       var graph = new GraphCreator(svg, nodes, edges);
-          // graph.setIdCt(2);
-          graph.setIdCt(7);
+          // graph.setIdCt(7);
+          graph.setIdCt(nodes.length);
       graph.updateGraph();
     })
 
